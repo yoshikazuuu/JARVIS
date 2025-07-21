@@ -7,32 +7,32 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		92E88B492E264E9200C93E2D /* MapKit-GeoJSON.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MapKit-GeoJSON.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		92E88C422E2E17BC00C93E2D /* JARVIS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JARVIS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		92E88B5B2E264E9300C93E2D /* Exceptions for "MapKit-GeoJSON" folder in "MapKit-GeoJSON" target */ = {
+		92E88C692E2E31B100C93E2D /* Exceptions for "JARVIS" folder in "JARVIS" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 92E88B482E264E9200C93E2D /* MapKit-GeoJSON */;
+			target = 92E88C412E2E17BC00C93E2D /* JARVIS */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		92E88B4B2E264E9200C93E2D /* MapKit-GeoJSON */ = {
+		92E88C442E2E17BC00C93E2D /* JARVIS */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				92E88B5B2E264E9300C93E2D /* Exceptions for "MapKit-GeoJSON" folder in "MapKit-GeoJSON" target */,
+				92E88C692E2E31B100C93E2D /* Exceptions for "JARVIS" folder in "JARVIS" target */,
 			);
-			path = "MapKit-GeoJSON";
+			path = JARVIS;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		92E88B462E264E9200C93E2D /* Frameworks */ = {
+		92E88C3F2E2E17BC00C93E2D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -42,18 +42,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		92E88B402E264E9200C93E2D = {
+		92E88C392E2E17BC00C93E2D = {
 			isa = PBXGroup;
 			children = (
-				92E88B4B2E264E9200C93E2D /* MapKit-GeoJSON */,
-				92E88B4A2E264E9200C93E2D /* Products */,
+				92E88C442E2E17BC00C93E2D /* JARVIS */,
+				92E88C432E2E17BC00C93E2D /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		92E88B4A2E264E9200C93E2D /* Products */ = {
+		92E88C432E2E17BC00C93E2D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				92E88B492E264E9200C93E2D /* MapKit-GeoJSON.app */,
+				92E88C422E2E17BC00C93E2D /* JARVIS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -61,64 +61,64 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		92E88B482E264E9200C93E2D /* MapKit-GeoJSON */ = {
+		92E88C412E2E17BC00C93E2D /* JARVIS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 92E88B5C2E264E9300C93E2D /* Build configuration list for PBXNativeTarget "MapKit-GeoJSON" */;
+			buildConfigurationList = 92E88C4D2E2E17BC00C93E2D /* Build configuration list for PBXNativeTarget "JARVIS" */;
 			buildPhases = (
-				92E88B452E264E9200C93E2D /* Sources */,
-				92E88B462E264E9200C93E2D /* Frameworks */,
-				92E88B472E264E9200C93E2D /* Resources */,
+				92E88C3E2E2E17BC00C93E2D /* Sources */,
+				92E88C3F2E2E17BC00C93E2D /* Frameworks */,
+				92E88C402E2E17BC00C93E2D /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				92E88B4B2E264E9200C93E2D /* MapKit-GeoJSON */,
+				92E88C442E2E17BC00C93E2D /* JARVIS */,
 			);
-			name = "MapKit-GeoJSON";
+			name = JARVIS;
 			packageProductDependencies = (
 			);
-			productName = "MapKit-GeoJSON";
-			productReference = 92E88B492E264E9200C93E2D /* MapKit-GeoJSON.app */;
+			productName = JARVIS;
+			productReference = 92E88C422E2E17BC00C93E2D /* JARVIS.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		92E88B412E264E9200C93E2D /* Project object */ = {
+		92E88C3A2E2E17BC00C93E2D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 2600;
 				LastUpgradeCheck = 2600;
 				TargetAttributes = {
-					92E88B482E264E9200C93E2D = {
+					92E88C412E2E17BC00C93E2D = {
 						CreatedOnToolsVersion = 26.0;
 					};
 				};
 			};
-			buildConfigurationList = 92E88B442E264E9200C93E2D /* Build configuration list for PBXProject "MapKit-GeoJSON" */;
+			buildConfigurationList = 92E88C3D2E2E17BC00C93E2D /* Build configuration list for PBXProject "JARVIS" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = 92E88B402E264E9200C93E2D;
+			mainGroup = 92E88C392E2E17BC00C93E2D;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 92E88B4A2E264E9200C93E2D /* Products */;
+			productRefGroup = 92E88C432E2E17BC00C93E2D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				92E88B482E264E9200C93E2D /* MapKit-GeoJSON */,
+				92E88C412E2E17BC00C93E2D /* JARVIS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		92E88B472E264E9200C93E2D /* Resources */ = {
+		92E88C402E2E17BC00C93E2D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -128,7 +128,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		92E88B452E264E9200C93E2D /* Sources */ = {
+		92E88C3E2E2E17BC00C93E2D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -138,69 +138,7 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		92E88B5D2E264E9300C93E2D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8FJ43598MQ;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "MapKit-GeoJSON/Info.plist";
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.yoshi.MapKit-GeoJSON";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		92E88B5E2E264E9300C93E2D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8FJ43598MQ;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "MapKit-GeoJSON/Info.plist";
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.yoshi.MapKit-GeoJSON";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		92E88B5F2E264E9300C93E2D /* Debug */ = {
+		92E88C4B2E2E17BC00C93E2D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -264,7 +202,7 @@
 			};
 			name = Debug;
 		};
-		92E88B602E264E9300C93E2D /* Release */ = {
+		92E88C4C2E2E17BC00C93E2D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -321,28 +259,94 @@
 			};
 			name = Release;
 		};
+		92E88C4E2E2E17BC00C93E2D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8FJ43598MQ;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = JARVIS/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yoshi.JARVIS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		92E88C4F2E2E17BC00C93E2D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8FJ43598MQ;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = JARVIS/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yoshi.JARVIS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		92E88B442E264E9200C93E2D /* Build configuration list for PBXProject "MapKit-GeoJSON" */ = {
+		92E88C3D2E2E17BC00C93E2D /* Build configuration list for PBXProject "JARVIS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				92E88B5F2E264E9300C93E2D /* Debug */,
-				92E88B602E264E9300C93E2D /* Release */,
+				92E88C4B2E2E17BC00C93E2D /* Debug */,
+				92E88C4C2E2E17BC00C93E2D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		92E88B5C2E264E9300C93E2D /* Build configuration list for PBXNativeTarget "MapKit-GeoJSON" */ = {
+		92E88C4D2E2E17BC00C93E2D /* Build configuration list for PBXNativeTarget "JARVIS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				92E88B5D2E264E9300C93E2D /* Debug */,
-				92E88B5E2E264E9300C93E2D /* Release */,
+				92E88C4E2E2E17BC00C93E2D /* Debug */,
+				92E88C4F2E2E17BC00C93E2D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 92E88B412E264E9200C93E2D /* Project object */;
+	rootObject = 92E88C3A2E2E17BC00C93E2D /* Project object */;
 }
