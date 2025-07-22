@@ -11,7 +11,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		92E88C692E2E31B100C93E2D /* Exceptions for "JARVIS" folder in "JARVIS" target */ = {
+		92E88CCC2E2F65FA00C93E2D /* Exceptions for "JARVIS" folder in "JARVIS" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -24,7 +24,7 @@
 		92E88C442E2E17BC00C93E2D /* JARVIS */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				92E88C692E2E31B100C93E2D /* Exceptions for "JARVIS" folder in "JARVIS" target */,
+				92E88CCC2E2F65FA00C93E2D /* Exceptions for "JARVIS" folder in "JARVIS" target */,
 			);
 			path = JARVIS;
 			sourceTree = "<group>";

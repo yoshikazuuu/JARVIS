@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct JXBMapView: View {
-    @State private var isOpen = true
+    @State private var isDestinationSelectionOpen = false
     @State private var text: String = ""
     var body: some View {
         GeometryReader { geometry in
@@ -34,6 +34,9 @@ struct JXBMapView: View {
                         .frame(width: 40, height: 40, alignment: .center)
                         .background(.white)
                         .cornerRadius(24)
+                        .onTapGesture(
+                            perform: { isDestinationSelectionOpen.toggle() }
+                        )
                     }
                     .padding(.horizontal, 6)
                     .padding(.vertical, 0)
@@ -52,12 +55,38 @@ struct JXBMapView: View {
             }
             .navigationTitle("JXB Map")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("JxB Map")
+                        .padding(12)
+                        .frame(width: 135, alignment: .center)
+                        .font(.mulish(16, .bold))
+                        .font(.headline)
+                        .glassEffect()
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: { isDestinationSelectionOpen.toggle() }) {
+                        Image(systemName: "info.circle")
+                    }
+                }
+            }
             .ignoresSafeArea()
-            
+            .fullScreenCover(
+                isPresented: $isDestinationSelectionOpen,
+                content: { DestinationSelectionView()}
+            )
         }
     }
 }
 
 #Preview {
-    JXBMapView()
+    NavigationStack {
+        VStack {
+            NavigationLink("Go to MapView") {
+                JXBMapView()
+            }
+            .padding()
+            Spacer()
+        }
+    }
 }
