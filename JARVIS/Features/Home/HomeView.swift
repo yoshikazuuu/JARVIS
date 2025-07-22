@@ -51,15 +51,21 @@ struct HomeView: View {
                 .padding(16)
                 .frame(width: geometry.size.width, alignment: .leading)
                 .background(
-                    ZStack(content: {
+                    ZStack {
                         Color.accent
+                        RadialGradient(
+                            gradient: Gradient(colors: [Color.white.opacity(0.65), .clear]),
+                            center: UnitPoint(x: 0.1, y: 1.7),
+                            startRadius: 0,
+                            endRadius: 150
+                        )
                         HStack {
                             Spacer()
                             Image("path")
                                 .resizable()
                                 .scaledToFit()
                         }
-                    })
+                    }
                 )
                 .cornerRadius(20)
                 .shadow(color: .black.opacity(0.12), radius: 1, x: 0, y: 1)

@@ -10,12 +10,13 @@ import SwiftUI
 struct JXBMapView: View {
     @State private var isDestinationSelectionOpen = false
     @State private var text: String = ""
+    
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .bottom) {
                 MapView()
                     .ignoresSafeArea()
-                
+
                 VStack(alignment: .center, spacing: 16) {
                     HStack(alignment: .center) {
                         Text("Where do u wanna go?")
@@ -23,16 +24,16 @@ struct JXBMapView: View {
                                 Font.custom("Mulish", size: 20)
                                     .weight(.bold)
                             )
-                            .foregroundColor(.white)
                             .fixedSize()
-                        
+
                         Spacer()
-                        
+
                         HStack(alignment: .center, spacing: 10) {
                             Image(systemName: "magnifyingglass")
                         }
                         .frame(width: 40, height: 40, alignment: .center)
-                        .background(.white)
+                        .foregroundStyle(.white)
+                        .background(.accent)
                         .cornerRadius(24)
                         .onTapGesture(
                             perform: { isDestinationSelectionOpen.toggle() }
@@ -49,21 +50,13 @@ struct JXBMapView: View {
                     height: geometry.safeAreaInsets.bottom + 60,
                     alignment: .topLeading
                 )
-                .background(.accent)
-                .clipShape(.rect(topLeadingRadius: 24, topTrailingRadius: 24))
                 .shadow(color: .black.opacity(0.08), radius: 4, x: 0, y: -1)
+                .glassEffect(
+                    .regular,
+                    in: .rect(topLeadingRadius: 24, topTrailingRadius: 24)
+                )
             }
-            .navigationTitle("JXB Map")
-            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text("JxB Map")
-                        .padding(12)
-                        .frame(width: 135, alignment: .center)
-                        .font(.mulish(16, .bold))
-                        .font(.headline)
-                        .glassEffect()
-                }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: { isDestinationSelectionOpen.toggle() }) {
                         Image(systemName: "info.circle")
@@ -73,7 +66,9 @@ struct JXBMapView: View {
             .ignoresSafeArea()
             .fullScreenCover(
                 isPresented: $isDestinationSelectionOpen,
-                content: { DestinationSelectionView()}
+                content: {
+                    DestinationSelectionView()
+                }
             )
         }
     }
@@ -81,12 +76,12 @@ struct JXBMapView: View {
 
 #Preview {
     NavigationStack {
-        VStack {
-            NavigationLink("Go to MapView") {
+//        VStack {
+//            NavigationLink("Go to MapView") {
                 JXBMapView()
-            }
-            .padding()
-            Spacer()
-        }
+//            }
+//            .padding()
+//            Spacer()
+//        }
     }
 }
