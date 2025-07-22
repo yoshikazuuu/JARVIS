@@ -516,7 +516,4 @@ struct MapView: UIViewControllerRepresentable {
         context: Context
     ) {
     }
-
-    typealias UIViewControllerType = MapViewController
-
 }
