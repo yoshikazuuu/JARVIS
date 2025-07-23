@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct JXBMapView: View {
+    @StateObject private var viewModel = MapViewModel()
     @State private var isDestinationSelectionOpen = false
     @State private var text: String = ""
     
@@ -68,6 +69,7 @@ struct JXBMapView: View {
                 isPresented: $isDestinationSelectionOpen,
                 content: {
                     DestinationView()
+                        .environmentObject(viewModel)
                 }
             )
         }

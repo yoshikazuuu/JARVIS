@@ -38,6 +38,7 @@ struct BoothRowView: View {
 }
 
 struct DestinationView: View {
+    @EnvironmentObject var viewModel: MapViewModel
     @Environment(\.dismiss) var dismiss
 
     @State private var isSearchCurrentLocationOpen = false
@@ -194,9 +195,11 @@ struct DestinationView: View {
         }
         .sheet(isPresented: $isSearchCurrentLocationOpen) {
             SearchCurrentLocationSheetView()
+                .environmentObject(viewModel)
         }
         .sheet(isPresented: $isSearchDestinationOpen) {
             SearchDestinationSheetView()
+                .environmentObject(viewModel)
         }
     }
 }

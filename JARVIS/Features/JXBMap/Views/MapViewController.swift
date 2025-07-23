@@ -8,7 +8,7 @@
 
 import CoreLocation
 import GameplayKit
-import MapKit
+internal import MapKit
 import SwiftUI
 import simd
 
