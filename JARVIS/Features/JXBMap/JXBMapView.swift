@@ -67,7 +67,7 @@ struct JXBMapView: View {
             .fullScreenCover(
                 isPresented: $isDestinationSelectionOpen,
                 content: {
-                    DestinationSelectionView()
+                    DestinationView()
                 }
             )
         }
@@ -75,13 +75,5 @@ struct JXBMapView: View {
 }
 
 #Preview {
-    NavigationStack {
-//        VStack {
-//            NavigationLink("Go to MapView") {
-                JXBMapView()
-//            }
-//            .padding()
-//            Spacer()
-//        }
-    }
+    JXBMapView()
 }

@@ -1,5 +1,5 @@
 //
-//  DestinationSelectionView.swift
+//  DestinationView.swift
 //  JARVIS
 //
 //  Created by Jerry Febriano on 22/07/25.
@@ -28,7 +28,7 @@ struct BoothRowView: View {
                         .foregroundStyle(.textSecondary)
                 }
             }
-            
+
             Divider()
                 .padding(.top, 16)
                 .padding(.leading, 34)
@@ -37,8 +37,11 @@ struct BoothRowView: View {
     }
 }
 
-struct DestinationSelectionView: View {
+struct DestinationView: View {
     @Environment(\.dismiss) var dismiss
+
+    @State private var isSearchCurrentLocationOpen = false
+    @State private var isSearchDestinationOpen = false
 
     var body: some View {
         let examples = Booth.examples
@@ -80,25 +83,34 @@ struct DestinationSelectionView: View {
                         }
 
                         VStack(alignment: .leading) {
-                            VStack(
-                                alignment: .leading
-                            ) {
-                                Text("Azzura")
-                                    .font(.mulish(14, .semibold))
-                                Text("Hall A")
-                                    .font(.mulish(13))
-                                    .foregroundStyle(.textSecondary)
+                            Button {
+                                isSearchCurrentLocationOpen.toggle()
+                            } label: {
+                                VStack(
+                                    alignment: .leading
+                                ) {
+                                    Text("Azzura")
+                                        .font(.mulish(14, .semibold))
+                                    Text("Hall A")
+                                        .font(.mulish(13))
+                                        .foregroundStyle(.textSecondary)
+                                }
                             }
                             .frame(height: 30)
 
+
                             Divider()
 
-                            VStack(
-                                alignment: .leading
-                            ) {
-                                Text("Pick your destination!")
-                                    .font(.mulish(14, .semibold))
-                                    .foregroundStyle(.textSecondary)
+                            Button {
+                                isSearchDestinationOpen.toggle()
+                            } label: {
+                                HStack {
+                                    Text("Pick your destination!")
+                                        .font(.mulish(14, .semibold))
+                                        .foregroundStyle(.textSecondary)
+                                    Spacer()
+                                }
+                                .frame(maxWidth: .infinity)
                             }
                             .frame(height: 30)
                         }
@@ -180,9 +192,15 @@ struct DestinationSelectionView: View {
                 Color.surface
             }
         }
+        .sheet(isPresented: $isSearchCurrentLocationOpen) {
+            SearchCurrentLocationSheetView()
+        }
+        .sheet(isPresented: $isSearchDestinationOpen) {
+            SearchDestinationSheetView()
+        }
     }
 }
 
 #Preview {
-    DestinationSelectionView()
+    DestinationView()
 }
