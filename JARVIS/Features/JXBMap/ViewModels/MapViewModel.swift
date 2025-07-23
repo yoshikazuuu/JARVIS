@@ -7,7 +7,7 @@
 
 import Combine
 import Foundation
-internal import MapKit
+import MapKit
 
 class MapViewModel: ObservableObject {
     @Published var locations: [CustomPointAnnotation] = []

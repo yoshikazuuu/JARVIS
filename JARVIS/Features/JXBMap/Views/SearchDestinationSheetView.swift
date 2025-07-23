@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-internal import MapKit
+import MapKit
 
 struct SearchDestinationSheetView: View {
     @Environment(\.dismiss) var dismiss
@@ -27,7 +27,6 @@ struct SearchDestinationSheetView: View {
                             .foregroundStyle(.white.opacity(0.7))
                     )
                     .foregroundStyle(.white)
-
                 }
                 .padding()
                 .clipShape(.rect(cornerRadius: 24))
@@ -51,12 +50,12 @@ struct SearchDestinationSheetView: View {
                         || $0.title?.localizedCaseInsensitiveContains(
                             searchText
                         )
-                            ?? false
+                        ?? false
                 },
                 id: \.self
             ) { location in
                 Button(action: {
-                    viewModel.selectedCurrentLocation = location
+                    viewModel.selectedDestinationLocation = location
                     dismiss()
                 }) {
                     Text(location.title ?? "Unknown")
@@ -65,9 +64,4 @@ struct SearchDestinationSheetView: View {
             .listStyle(.plain)
         }
     }
-}
-
-#Preview {
-    SearchDestinationSheetView()
-        .environmentObject(MapViewModel())
 }

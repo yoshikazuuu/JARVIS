@@ -5,7 +5,7 @@
 //  Created by Jerry Febriano on 22/07/25.
 //
 
-internal import MapKit
+import MapKit
 import SwiftUI
 
 struct SearchCurrentLocationSheetView: View {
@@ -27,7 +27,6 @@ struct SearchCurrentLocationSheetView: View {
                             .foregroundStyle(.white.opacity(0.7))
                     )
                     .foregroundStyle(.white)
-
                 }
                 .padding()
                 .clipShape(.rect(cornerRadius: 24))
@@ -51,7 +50,7 @@ struct SearchCurrentLocationSheetView: View {
                         || $0.title?.localizedCaseInsensitiveContains(
                             searchText
                         )
-                            ?? false
+                        ?? false
                 },
                 id: \.self
             ) { location in
@@ -65,9 +64,4 @@ struct SearchCurrentLocationSheetView: View {
             .listStyle(.plain)
         }
     }
-}
-
-#Preview {
-    SearchCurrentLocationSheetView()
-        .environmentObject(MapViewModel())
 }

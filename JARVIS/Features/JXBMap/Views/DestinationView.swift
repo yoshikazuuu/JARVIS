@@ -5,6 +5,7 @@
 //  Created by Jerry Febriano on 22/07/25.
 //
 
+import MapKit
 import SwiftUI
 
 struct BoothRowView: View {
@@ -63,7 +64,6 @@ struct DestinationView: View {
                                 .font(.system(size: 20))
                                 .foregroundStyle(.text)
                         }
-
                     }
 
                     HStack(spacing: 12) {
@@ -90,15 +90,20 @@ struct DestinationView: View {
                                 VStack(
                                     alignment: .leading
                                 ) {
-                                    Text("Azzura")
-                                        .font(.mulish(14, .semibold))
-                                    Text("Hall A")
-                                        .font(.mulish(13))
-                                        .foregroundStyle(.textSecondary)
+                                    if let currentLocation = viewModel
+                                        .selectedCurrentLocation
+                                    {
+                                        Text(currentLocation.title ?? "Unknown")
+                                            .font(.mulish(14, .semibold))
+                                    } else {
+                                        Text("Select your current location")
+                                            .font(.mulish(14, .semibold))
+                                            .foregroundStyle(.textSecondary)
+                                    }
                                 }
+                                .frame(maxWidth: .infinity, alignment: .leading)
                             }
                             .frame(height: 30)
-
 
                             Divider()
 
@@ -106,9 +111,20 @@ struct DestinationView: View {
                                 isSearchDestinationOpen.toggle()
                             } label: {
                                 HStack {
-                                    Text("Pick your destination!")
+                                    if let destinationLocation = viewModel
+                                        .selectedDestinationLocation
+                                    {
+                                        Text(
+                                            destinationLocation.title
+                                                ?? "Unknown"
+                                        )
                                         .font(.mulish(14, .semibold))
-                                        .foregroundStyle(.textSecondary)
+                                        .foregroundStyle(.text)
+                                    } else {
+                                        Text("Pick your destination!")
+                                            .font(.mulish(14, .semibold))
+                                            .foregroundStyle(.textSecondary)
+                                    }
                                     Spacer()
                                 }
                                 .frame(maxWidth: .infinity)
@@ -193,6 +209,12 @@ struct DestinationView: View {
                 Color.surface
             }
         }
+        .onChange(of: viewModel.selectedCurrentLocation, {
+            checkAndDismiss()
+        })
+        .onChange(of: viewModel.selectedDestinationLocation, {
+            checkAndDismiss()
+        })
         .sheet(isPresented: $isSearchCurrentLocationOpen) {
             SearchCurrentLocationSheetView()
                 .environmentObject(viewModel)
@@ -202,8 +224,10 @@ struct DestinationView: View {
                 .environmentObject(viewModel)
         }
     }
-}
-
-#Preview {
-    DestinationView()
+    
+    private func checkAndDismiss() {
+        if viewModel.selectedCurrentLocation != nil, viewModel.selectedDestinationLocation != nil {
+            dismiss()
+        }
+    }
 }

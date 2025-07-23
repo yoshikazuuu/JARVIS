@@ -6,6 +6,26 @@
 //
 
 import SwiftUI
+import MapKit
+
+struct MapView: UIViewControllerRepresentable {
+    @Binding var selectedCurrentLocation: CustomPointAnnotation?
+    @Binding var selectedDestinationLocation: CustomPointAnnotation?
+
+    func makeUIViewController(context: Context) -> MapViewController {
+        return MapViewController()
+    }
+
+    func updateUIViewController(
+        _ uiViewController: MapViewController,
+        context: Context
+    ) {
+        uiViewController.updateRoute(
+            from: selectedCurrentLocation,
+            to: selectedDestinationLocation
+        )
+    }
+}
 
 struct JXBMapView: View {
     @StateObject private var viewModel = MapViewModel()
@@ -15,8 +35,11 @@ struct JXBMapView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .bottom) {
-                MapView()
-                    .ignoresSafeArea()
+                MapView(
+                    selectedCurrentLocation: $viewModel.selectedCurrentLocation,
+                    selectedDestinationLocation: $viewModel.selectedDestinationLocation
+                )
+                .ignoresSafeArea()
 
                 VStack(alignment: .center, spacing: 16) {
                     HStack(alignment: .center) {
@@ -74,8 +97,4 @@ struct JXBMapView: View {
             )
         }
     }
-}
-
-#Preview {
-    JXBMapView()
 }
