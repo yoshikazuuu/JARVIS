@@ -430,6 +430,8 @@ extension MapViewController {
 struct FeatureProperties: Codable {
     let name: String
     let object_type: String?
+    let booth_type: String?
+    let location: String?
 }
 
 class CustomPolygon: MKPolygon {

@@ -58,7 +58,17 @@ struct SearchDestinationSheetView: View {
                     viewModel.selectedDestinationLocation = location
                     dismiss()
                 }) {
-                    Text(location.title ?? "Unknown")
+                    let booth = Booth(
+                        name: location.properties?.name
+                            ?? "Unknown",
+                        location: location.properties?.location
+                            ?? "Unknown",
+                        boothType: BoothType(
+                            rawValue: location.properties?
+                                .booth_type ?? ""
+                        ) ?? .booth
+                    )
+                    BoothRowView(booth: booth, isInSearch: true)
                 }
             }
             .listStyle(.plain)

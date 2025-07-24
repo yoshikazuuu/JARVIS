@@ -11,6 +11,7 @@ import MapKit
 
 class MapViewModel: ObservableObject {
     @Published var locations: [CustomPointAnnotation] = []
+    @Published var boothLocations: [CustomPointAnnotation] = []
     @Published var selectedCurrentLocation: CustomPointAnnotation?
     @Published var selectedDestinationLocation: CustomPointAnnotation?
 
@@ -33,6 +34,10 @@ class MapViewModel: ObservableObject {
             let geoJSONObjects = try MKGeoJSONDecoder().decode(data)
             let (parsedAnnotations, _) = parseGeoJSONFeatures(geoJSONObjects)
             self.locations = parsedAnnotations
+            
+            self.boothLocations = parsedAnnotations.filter {
+                $0.properties?.object_type == "point" && $0.properties?.booth_type != nil
+            }
 
         } catch {
             print("Error loading GeoJSON: \(error.localizedDescription)")
