@@ -1,8 +1,8 @@
 //
-//  JXBMapView.swift
-//  JARVIS
+//  JXBMapView.swift
+//  JARVIS
 //
-//  Created by Jerry Febriano on 21/07/25.
+//  Created by Jerry Febriano on 21/07/25.
 //
 
 import CoreLocation
@@ -35,7 +35,6 @@ struct MapView: UIViewControllerRepresentable {
 struct JXBMapView: View {
     @StateObject private var viewModel = MapViewModel()
     @State private var isDestinationSelectionOpen = false
-    @State private var text: String = ""
 
     var body: some View {
         GeometryReader { geometry in
@@ -43,60 +42,52 @@ struct JXBMapView: View {
                 MapView(
                     viewModel: viewModel,
                     selectedCurrentLocation: $viewModel.selectedCurrentLocation,
-                    selectedDestinationLocation: $viewModel.selectedDestinationLocation
+                    selectedDestinationLocation: $viewModel
+                        .selectedDestinationLocation
                 )
                 .ignoresSafeArea()
 
-                VStack(alignment: .center, spacing: 16) {
-                    HStack(alignment: .center) {
-                        if let destination = viewModel.selectedDestinationLocation {
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(destination.title ?? "Unknown")
-                                    .font(.mulish(20, .bold))
-                                    .foregroundStyle(Color.text)
-
-                                Text(destination.properties?.location ?? "Unknown")
-                                    .font(.mulish(14, .semibold))
-                                    .foregroundStyle(Color.textSecondary)
-                            }
-                        } else {
+                // Show search bar only when no destination is selected
+                if viewModel.selectedDestinationLocation == nil {
+                    VStack(alignment: .center, spacing: 16) {
+                        HStack(alignment: .center) {
                             Text("Where do u wanna go?")
                                 .font(
                                     Font.custom("Mulish", size: 20)
                                         .weight(.bold)
                                 )
                                 .fixedSize()
-                        }
 
-                        Spacer()
+                            Spacer()
 
-                        HStack(alignment: .center, spacing: 10) {
-                            Image(systemName: "magnifyingglass")
+                            HStack(alignment: .center, spacing: 10) {
+                                Image(systemName: "magnifyingglass")
+                            }
+                            .frame(width: 40, height: 40, alignment: .center)
+                            .foregroundStyle(.white)
+                            .background(.accent)
+                            .cornerRadius(24)
+                            .onTapGesture(
+                                perform: { isDestinationSelectionOpen.toggle() }
+                            )
                         }
-                        .frame(width: 40, height: 40, alignment: .center)
-                        .foregroundStyle(.white)
-                        .background(.accent)
-                        .cornerRadius(24)
-                        .onTapGesture(
-                            perform: { isDestinationSelectionOpen.toggle() }
-                        )
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 0)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
-                    .padding(.horizontal, 6)
-                    .padding(.vertical, 0)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+                    .padding(.bottom, 8)
+                    .frame(
+                        width: geometry.size.width,
+                        height: geometry.safeAreaInsets.bottom + 80,
+                        alignment: .topLeading
+                    )
+                    .shadow(color: .black.opacity(0.08), radius: 4, x: 0, y: -1)
+                    .glassEffect(
+                        .regular,
+                        in: .rect(topLeadingRadius: 24, topTrailingRadius: 24)
+                    )
                 }
-                .padding()
-                .padding(.bottom, 8)
-                .frame(
-                    width: geometry.size.width,
-                    height: geometry.safeAreaInsets.bottom + 80,
-                    alignment: .topLeading
-                )
-                .shadow(color: .black.opacity(0.08), radius: 4, x: 0, y: -1)
-                .glassEffect(
-                    .regular,
-                    in: .rect(topLeadingRadius: 24, topTrailingRadius: 24)
-                )
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -115,7 +106,9 @@ struct JXBMapView: View {
             )
             .onChange(of: viewModel.userLocation) { oldLocation, userLocation in
                 // Only pre-fill if a location is found and a current location hasn't been selected yet.
-                guard let userLocation = userLocation, viewModel.selectedCurrentLocation == nil else { return }
+                guard let userLocation = userLocation,
+                    viewModel.selectedCurrentLocation == nil
+                else { return }
 
                 var closestLocation: CustomPointAnnotation?
                 var minDistance: CLLocationDistance = .greatestFiniteMagnitude
@@ -132,6 +125,20 @@ struct JXBMapView: View {
                     }
                 }
                 viewModel.selectedCurrentLocation = closestLocation
+            }
+            .sheet(item: $viewModel.selectedDestinationLocation) {
+                destination in
+                DestinationSheetContentView(
+                    destination: destination,
+                    onSearchTapped: {
+                        // Dismiss the sheet and open the fullscreen cover
+                        viewModel.selectedDestinationLocation = nil
+                        isDestinationSelectionOpen = true
+                    }
+                )
+                .presentationDetents([.height(95), .medium, .large])
+                .presentationDragIndicator(.hidden)
+                .presentationBackgroundInteraction(.enabled)
             }
         }
     }
