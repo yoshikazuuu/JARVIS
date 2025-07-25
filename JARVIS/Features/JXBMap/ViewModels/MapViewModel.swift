@@ -6,10 +6,12 @@
 //
 
 import Combine
+import CoreLocation
 import Foundation
 import MapKit
 
 class MapViewModel: ObservableObject {
+    @Published var userLocation: CLLocation?
     @Published var locations: [CustomPointAnnotation] = []
     @Published var boothLocations: [CustomPointAnnotation] = []
     @Published var selectedCurrentLocation: CustomPointAnnotation?

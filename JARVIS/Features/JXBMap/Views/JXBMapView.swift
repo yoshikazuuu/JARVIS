@@ -9,17 +9,21 @@ import SwiftUI
 import MapKit
 
 struct MapView: UIViewControllerRepresentable {
+    @ObservedObject var viewModel: MapViewModel
     @Binding var selectedCurrentLocation: CustomPointAnnotation?
     @Binding var selectedDestinationLocation: CustomPointAnnotation?
 
     func makeUIViewController(context: Context) -> MapViewController {
-        return MapViewController()
+        let controller = MapViewController()
+        controller.viewModel = viewModel
+        return controller
     }
 
     func updateUIViewController(
         _ uiViewController: MapViewController,
         context: Context
     ) {
+        uiViewController.viewModel = viewModel
         uiViewController.updateRoute(
             from: selectedCurrentLocation,
             to: selectedDestinationLocation
@@ -31,11 +35,12 @@ struct JXBMapView: View {
     @StateObject private var viewModel = MapViewModel()
     @State private var isDestinationSelectionOpen = false
     @State private var text: String = ""
-    
+
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .bottom) {
                 MapView(
+                    viewModel: viewModel,
                     selectedCurrentLocation: $viewModel.selectedCurrentLocation,
                     selectedDestinationLocation: $viewModel.selectedDestinationLocation
                 )
@@ -43,12 +48,24 @@ struct JXBMapView: View {
 
                 VStack(alignment: .center, spacing: 16) {
                     HStack(alignment: .center) {
-                        Text("Where do u wanna go?")
-                            .font(
-                                Font.custom("Mulish", size: 20)
-                                    .weight(.bold)
-                            )
-                            .fixedSize()
+                        if let destination = viewModel.selectedDestinationLocation {
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text(destination.title ?? "Unknown")
+                                    .font(.mulish(20, .bold))
+                                    .foregroundStyle(Color.text)
+
+                                Text(destination.properties?.location ?? "Unknown")
+                                    .font(.mulish(14, .semibold))
+                                    .foregroundStyle(Color.textSecondary)
+                            }
+                        } else {
+                            Text("Where do u wanna go?")
+                                .font(
+                                    Font.custom("Mulish", size: 20)
+                                        .weight(.bold)
+                                )
+                                .fixedSize()
+                        }
 
                         Spacer()
 
@@ -71,7 +88,7 @@ struct JXBMapView: View {
                 .padding(.bottom, 8)
                 .frame(
                     width: geometry.size.width,
-                    height: geometry.safeAreaInsets.bottom + 60,
+                    height: geometry.safeAreaInsets.bottom + 80,
                     alignment: .topLeading
                 )
                 .shadow(color: .black.opacity(0.08), radius: 4, x: 0, y: -1)

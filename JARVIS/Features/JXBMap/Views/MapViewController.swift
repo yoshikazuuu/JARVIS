@@ -20,6 +20,8 @@ extension CLLocationCoordinate2D {
 }
 
 class MapViewController: UIViewController {
+    var viewModel: MapViewModel?
+
     // MARK: Properties - Map and Location
     private let locationManager = CLLocationManager()
     private var mapOverlays: [MKOverlay] = []
@@ -371,6 +373,12 @@ extension MapViewController: MKMapViewDelegate {
 }
 
 extension MapViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            viewModel?.userLocation = location
+        }
+    }
+
     func locationManager(
         _ manager: CLLocationManager,
         didChangeAuthorization status: CLAuthorizationStatus

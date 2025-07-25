@@ -5,6 +5,7 @@
 //  Created by Jerry Febriano on 22/07/25.
 //
 
+import CoreLocation
 import MapKit
 import SwiftUI
 
@@ -67,7 +68,7 @@ struct DestinationView: View {
                                         .font(.mulish(14, .semibold))
                                     Text(
                                         currentLocation.properties?.location
-                                        ?? "Unknown"
+                                            ?? "Unknown"
                                     )
                                     .font(.mulish(13))
                                     .foregroundStyle(.textSecondary)
@@ -182,17 +183,42 @@ struct DestinationView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
                     ForEach(suggestedBooths) { annotation in
-                        let booth = Booth(
-                            name: annotation.properties?.name
-                                ?? "Unknown",
-                            location: annotation.properties?.location
-                                ?? "Unknown",
-                            boothType: BoothType(
-                                rawValue: annotation.properties?
-                                    .booth_type ?? ""
-                            ) ?? .booth
-                        )
-                        BoothRowView(booth: booth)
+                        Button(action: {
+                            viewModel.selectedDestinationLocation = annotation
+
+                            if let userLocation = viewModel.userLocation {
+                                let potentialStartLocations = viewModel.locations.filter { $0.title != annotation.title }
+                                var closestLocation: CustomPointAnnotation?
+                                var minDistance: CLLocationDistance = .greatestFiniteMagnitude
+
+                                for location in potentialStartLocations {
+                                    let pointLocation = CLLocation(
+                                        latitude: location.coordinate.latitude,
+                                        longitude: location.coordinate.longitude
+                                    )
+                                    let distance = userLocation.distance(from: pointLocation)
+                                    if distance < minDistance {
+                                        minDistance = distance
+                                        closestLocation = location
+                                    }
+                                }
+
+                                viewModel.selectedCurrentLocation = closestLocation
+                            }
+                        }) {
+                            let booth = Booth(
+                                name: annotation.properties?.name
+                                    ?? "Unknown",
+                                location: annotation.properties?.location
+                                    ?? "Unknown",
+                                boothType: BoothType(
+                                    rawValue: annotation.properties?
+                                        .booth_type ?? ""
+                                ) ?? .booth
+                            )
+                            BoothRowView(booth: booth)
+                        }
+                        .buttonStyle(.plain)
                     }
                 }
             }
@@ -247,7 +273,7 @@ struct DestinationView: View {
 
     private func checkAndDismiss() {
         if viewModel.selectedCurrentLocation != nil,
-            viewModel.selectedDestinationLocation != nil
+           viewModel.selectedDestinationLocation != nil
         {
             dismiss()
         }
