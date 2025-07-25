@@ -10,61 +10,67 @@ import SwiftUI
 
 struct DestinationSheetContentView: View {
     let destination: CustomPointAnnotation
-    let onSearchTapped: () -> Void // Add this closure property
+    let onSearchTapped: () -> Void
+    let onDoneTapped: () -> Void
 
     var body: some View {
         VStack(spacing: 0) {
-            Capsule()
-                .fill(Color.secondary.opacity(0.3))
-                .frame(width: 40, height: 5)
-                .padding(8)
+            VStack(spacing: 0) {
 
-            HStack(spacing: 16) {
-                Image(systemName: "figure.walk")
-                    .font(.system(size: 28))
-                    .foregroundStyle(Color.text.opacity(0.6))
-                    .frame(width: 30)
-
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(destination.title ?? "Unknown Destination")
-                        .font(.mulish(18, .bold))
-                    Text(
-                        destination.properties?.location
-                            ?? "Location not available"
-                    )
-                    .font(.mulish(14, .regular))
-                    .foregroundStyle(.secondary)
-                }
+                Capsule()
+                    .fill(Color.secondary.opacity(0.3))
+                    .frame(width: 40, height: 5)
 
                 Spacer()
+                
+                HStack(spacing: 16) {
+                    Image(systemName: "figure.walk")
+                        .font(.system(size: 28))
+                        .foregroundStyle(Color.text.opacity(0.6))
+                        .frame(width: 30)
 
-                HStack(spacing: 12) {
-                    Button(action: {
-                        onSearchTapped() // Call the closure
-                    }) {
-                        Image(systemName: "magnifyingglass")
-                            .font(.system(size: 18, weight: .bold))
-                            .foregroundStyle(.white)
-                            .frame(width: 40, height: 40)
-                            .background(.accent)
-                            .clipShape(Circle())
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(destination.title ?? "Unknown Destination")
+                            .font(.mulish(18, .bold))
+                        Text(
+                            destination.properties?.location
+                                ?? "Location not available"
+                        )
+                        .font(.mulish(14, .regular))
+                        .foregroundStyle(.secondary)
                     }
 
-                    Button(action: {
+                    Spacer()
 
-                    }) {
-                        Image(systemName: "checkmark")
-                            .font(.system(size: 18, weight: .bold))
-                            .foregroundStyle(.accent)
-                            .frame(width: 40, height: 40)
-                            .background(
-                                Circle().stroke(.accent, lineWidth: 2)
-                            )
+                    HStack(spacing: 12) {
+                        Button(action: {
+                            onSearchTapped()
+                        }) {
+                            Image(systemName: "magnifyingglass")
+                                .font(.system(size: 18, weight: .bold))
+                                .foregroundStyle(.white)
+                                .frame(width: 40, height: 40)
+                                .background(.accent)
+                                .clipShape(Circle())
+                        }
+
+                        Button(action: {
+                            onDoneTapped()
+                        }) {
+                            Image(systemName: "checkmark")
+                                .font(.system(size: 18, weight: .bold))
+                                .foregroundStyle(.accent)
+                                .frame(width: 40, height: 40)
+                                .background(
+                                    Circle().stroke(.accent, lineWidth: 2)
+                                )
+                        }
                     }
                 }
+                Spacer()
             }
-            .padding(.horizontal)
-            .padding(.bottom, 12)
+            .padding()
+            .frame(height: 105)
 
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 28) {
@@ -99,7 +105,7 @@ struct DestinationSheetContentView: View {
                     .padding(.horizontal)
 
                     Button(action: {
-
+                        
                     }) {
                         Text("SEE ALL CATALOGUE")
                             .font(.mulish(16, .bold))

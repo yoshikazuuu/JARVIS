@@ -10,6 +10,7 @@ import CoreLocation
 import GameplayKit
 import MapKit
 import SwiftUI
+import Combine
 import simd
 
 extension CLLocationCoordinate2D {
@@ -22,14 +23,12 @@ extension CLLocationCoordinate2D {
 class MapViewController: UIViewController {
     var viewModel: MapViewModel?
 
-    // MARK: Properties - Map and Location
     private let locationManager = CLLocationManager()
     private var mapOverlays: [MKOverlay] = []
     private var obstacles: [GeoJSONPolygon] = []
     private var allObjects: [GeoJSONPolygon] = []
     private var graph: GKObstacleGraph? = nil
 
-    // MARK: Pathfinding Properties
     private var routeOverlay: MKPolyline?
 
     private lazy var mapView: MKMapView = {
@@ -76,7 +75,6 @@ class MapViewController: UIViewController {
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
         case .denied, .restricted:
-            // Handle denied or restricted access
             print("Location access denied or restricted.")
             break
         @unknown default:
@@ -327,48 +325,71 @@ extension MapViewController: MKMapViewDelegate {
         return MKOverlayRenderer(overlay: overlay)
     }
 
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation)
-        -> MKAnnotationView?
-    {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard let customAnnotation = annotation as? CustomPointAnnotation else {
             return nil
         }
 
         let identifier = "CustomAnnotation"
-        var view: MKMarkerAnnotationView
+        var view: CustomAnnotationView
 
         if let dequeuedView = mapView.dequeueReusableAnnotationView(
             withIdentifier: identifier
-        ) as? MKMarkerAnnotationView {
+        ) as? CustomAnnotationView {
             dequeuedView.annotation = customAnnotation
             view = dequeuedView
         } else {
-            view = MKMarkerAnnotationView(
+            view = CustomAnnotationView(
                 annotation: customAnnotation,
                 reuseIdentifier: identifier
             )
-            view.canShowCallout = true
         }
-
-        view.markerTintColor = UIColor.systemBlue
-        view.glyphImage = UIImage(systemName: "mappin.circle.fill")
-
-        if let name = customAnnotation.properties?.name.lowercased() {
-            if name.contains("lab") {
-                view.markerTintColor = UIColor.systemOrange
-                view.glyphImage = UIImage(systemName: "desktopcomputer")
-            } else if name.contains("pantry") || name.contains("kitchen") {
-                view.markerTintColor = UIColor.systemGreen
-                view.glyphImage = UIImage(systemName: "cup.and.saucer.fill")
-            } else if name.contains("board") || name.contains("collab") {
-                view.markerTintColor = UIColor.systemIndigo
-                view.glyphImage = UIImage(systemName: "person.2.fill")
-            } else if name.contains("locker") {
-                view.markerTintColor = UIColor.systemGray
-                view.glyphImage = UIImage(systemName: "lock.fill")
-            }
+        
+        view.onNavigateTapped = {
+            self.handleNavigateTapped(for: customAnnotation)
         }
+        
         return view
+    }
+    
+    func mapView(
+        _ mapView: MKMapView,
+        annotationView view: MKAnnotationView,
+        calloutAccessoryControlTapped control: UIControl
+    ) {
+        guard let customAnnotation = view.annotation as? CustomPointAnnotation,
+              let accessoryView = view.detailCalloutAccessoryView,
+              accessoryView == control // Ensure the tapped control is our custom view
+        else {
+            return
+        }
+    }
+    
+    private func handleNavigateTapped(for annotation: CustomPointAnnotation) {
+        viewModel?.selectedDestinationLocation = annotation
+        
+        // Auto-select closest current location if none selected
+        if viewModel?.selectedCurrentLocation == nil,
+           let userLocation = viewModel?.userLocation {
+            let potentialStartLocations = viewModel?.locations.filter { $0.title != annotation.title } ?? []
+            var closestLocation: CustomPointAnnotation?
+            var minDistance: CLLocationDistance = .greatestFiniteMagnitude
+
+            for location in potentialStartLocations {
+                let pointLocation = CLLocation(
+                    latitude: location.coordinate.latitude,
+                    longitude: location.coordinate.longitude
+                )
+                let distance = userLocation.distance(from: pointLocation)
+                if distance < minDistance {
+                    minDistance = distance
+                    closestLocation = location
+                }
+            }
+            viewModel?.selectedCurrentLocation = closestLocation
+        }
+        
+        mapView.deselectAnnotation(annotation, animated: true)
     }
 }
 
@@ -453,3 +474,4 @@ class CustomPolyline: MKPolyline {
 class CustomPointAnnotation: MKPointAnnotation, Identifiable {
     var properties: FeatureProperties?
 }
+
