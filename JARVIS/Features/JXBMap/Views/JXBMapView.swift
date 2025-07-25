@@ -5,8 +5,9 @@
 //  Created by Jerry Febriano on 21/07/25.
 //
 
-import SwiftUI
+import CoreLocation
 import MapKit
+import SwiftUI
 
 struct MapView: UIViewControllerRepresentable {
     @ObservedObject var viewModel: MapViewModel
@@ -112,6 +113,26 @@ struct JXBMapView: View {
                         .environmentObject(viewModel)
                 }
             )
+            .onChange(of: viewModel.userLocation) { oldLocation, userLocation in
+                // Only pre-fill if a location is found and a current location hasn't been selected yet.
+                guard let userLocation = userLocation, viewModel.selectedCurrentLocation == nil else { return }
+
+                var closestLocation: CustomPointAnnotation?
+                var minDistance: CLLocationDistance = .greatestFiniteMagnitude
+
+                for location in viewModel.locations {
+                    let pointLocation = CLLocation(
+                        latitude: location.coordinate.latitude,
+                        longitude: location.coordinate.longitude
+                    )
+                    let distance = userLocation.distance(from: pointLocation)
+                    if distance < minDistance {
+                        minDistance = distance
+                        closestLocation = location
+                    }
+                }
+                viewModel.selectedCurrentLocation = closestLocation
+            }
         }
     }
 }
